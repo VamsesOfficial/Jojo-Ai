@@ -507,6 +507,92 @@
                 transform: translateY(0);
             }
         }
+        
+        #preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0a0a0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  flex-direction: column;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#preloader.fade-out {
+  opacity: 0;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+
+.preloader-inner {
+  text-align: center;
+  animation: fadeInZoom 1.2s ease-in-out;
+}
+
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.glow-text {
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowPulse 3s ease-in-out infinite alternate;
+  margin-bottom: 24px;
+  letter-spacing: 3px;
+}
+
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 6px #a855f7, 0 0 12px #3b82f6;
+  }
+  100% {
+    text-shadow: 0 0 24px #a855f7, 0 0 48px #3b82f6;
+  }
+}
+
+.dot-wave {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.dot-wave span {
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  animation: dotBounce 1.4s ease-in-out infinite;
+}
+
+.dot-wave span:nth-child(1) { animation-delay: 0s; }
+.dot-wave span:nth-child(2) { animation-delay: 0.15s; }
+.dot-wave span:nth-child(3) { animation-delay: 0.3s; }
+.dot-wave span:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes dotBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-12px) scale(1.2);
+    opacity: 1;
+  }
+}
 
         .stagger-1 { animation-delay: 0.1s; }
         .stagger-2 { animation-delay: 0.2s; }
@@ -514,6 +600,14 @@
     </style>
 </head>
 <body>
+	<div id="preloader">
+  <div class="preloader-inner">
+    <div class="glow-text">JOJO AI</div>
+    <div class="dot-wave">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+</div>
     <div class="animated-bg">
         <div class="orb orb1"></div>
         <div class="orb orb2"></div>
@@ -669,6 +763,17 @@
     </footer>
 
     <script>
+    	window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    setTimeout(() => {
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 600); // durasi fade-out
+    }, 1400); // delay sebelum keluar, biar lebih dramatis
+});
+
+
         // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
