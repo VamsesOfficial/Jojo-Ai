@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - JOJO AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: inherit;
+            border-radius: inherit;
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0.5;
+        }
+
+        .dana-icon { background: linear-gradient(135deg, #108ee9 0%, #40a9ff 100%); }
+        .shopeepay-icon { background: linear-gradient(135deg, #ee4d2d 0%, #ff7a45 100%); }
+        .ovo-icon { background: linear-gradient(135deg, #4d2683 0%, #7c3aed 100%); }
+        .gopay-icon { background: linear-gradient(135deg, #00aed6 0%, #22d3ee 100%); }
+
+        .method-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Optimized background - reduced complexity */
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #6366f1 100%);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .payment-section {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+            outline: none;
+        }
+        
+        .premium-button {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .premium-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+        }
+        
+        .payment-method {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .payment-method:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            background: rgba(139, 92, 246, 0.1);
+        }
+        
+        .payment-method.active {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.2);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        
+        /* Simplified animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Reduced particle effects */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            animation: float 15s infinite ease-in-out;
+            z-index: -1;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .orb-1 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            right: 15%;
+            animation-delay: -5s;
+        }
+    </style>
+</head>
+<body class="text-white relative">
+    <!-- Optimized Background -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Reduced floating elements -->
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 min-h-screen py-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-12 fade-in">
+                    <h1 class="text-4xl font-bold mb-4 glow-text">
+                        <span class="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                            Complete Your Purchase
+                        </span>
+                    </h1>
+                    <p class="text-gray-300">Secure checkout for JOJO AI Professional Plan</p>
+                </div>
+                
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Payment Form -->
+                    <div class="lg:col-span-2">
+                        <div class="payment-section rounded-2xl p-8 slide-up">
+                            <!-- Payment Method Selection -->
+                            <div class="mb-8">
+                                <h3 class="text-xl font-semibold mb-4 text-purple-300">Select Payment Method</h3>
+                                <div class="grid grid-cols-2 gap-4 mb-6">
+                                    <div class="payment-method rounded-xl p-4 text-center active" data-method="card">
+                                        <div class="text-2xl mb-2">💳</div>
+                                        <div class="font-medium">Credit Card</div>
+                                    </div>
+                                    <div class="payment-method rounded-xl p-4 text-center" data-method="dana">
+                                        <div class="flex justify-center mb-2">
+    <div class="logo-icon dana-icon">Dana</div>
+</div>
+<div class="font-medium">Dana</div>
+
+                                    </div>
+                                    <div class="payment-method rounded-xl p-4 text-center" data-method="gopay">
+                                        <div class="flex justify-center mb-2">
+    <div class="logo-icon gopay-icon">GoPay</div>
+</div>
+<div class="font-medium">GoPay</div>
+
+                                    </div>
+                                    <div class="payment-method rounded-xl p-4 text-center" data-method="ovo">
+                                        <div class="flex justify-center mb-2">
+    <div class="logo-icon ovo-icon">OVO</div>
+</div>
+<div class="font-medium">OVO</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Personal Information - Only shown for Credit Card -->
+                            <div id="personalInfo" class="mb-8">
+                                <h3 class="text-lg font-semibold mb-4 text-purple-300">Personal Information</h3>
+                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2 text-gray-300">First Name</label>
+                                        <input type="text" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-400" placeholder="John" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2 text-gray-300">Last Name</label>
+                                        <input type="text" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-400" placeholder="Doe" required>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium mb-2 text-gray-300">Email Address</label>
+                                    <input type="email" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-400" placeholder="john@company.com" required>
+                                </div>
+                            </div>
+                            
+                            <form class="space-y-6" id="paymentForm">
+                                <!-- Payment Details -->
+                                <div id="paymentDetails">
+                                    <!-- Credit Card Form (default) -->
+                                    <div id="cardForm" class="payment-form">
+                                        <h3 class="text-lg font-semibold mb-4 text-purple-300">Card Information</h3>
+                                        <div class="space-y-4">
+                                            <div>
+                                                <label class="block text-sm font-medium mb-2 text-gray-300">Card Number</label>
+                                                <input type="text" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-400" placeholder="1234 5678 9012 3456" maxlength="19">
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-2 text-gray-300">Expiry Date</label>
+                                                    <input type="text" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-400" placeholder="MM/YY" maxlength="5">
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium mb-2 text-gray-300">CVC</label>
+                                                    <input type="text" class="input-field w-full px-4 py-3 rounded-xl text-white placeholder-gray-400" placeholder="123" maxlength="3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- DANA Form -->
+                                    <div id="danaForm" class="payment-form hidden">
+                                        <h3 class="text-lg font-semibold mb-4 text-purple-300">DANA Payment</h3>
+                                        <div class="text-center p-8">
+    <div class="flex justify-center mb-4">
+        <div class="logo-icon dana-icon">Dana</div>
+    </div>
+    <h4 class="text-xl font-semibold mb-2">Pay with Dana</h4>
+    <p class="text-gray-300 mb-6">You will be redirected to Dana app to complete your payment securely.</p>
+    <div class="p-4 bg-green-500/20 rounded-xl">
+        <p class="text-sm text-green-200">🔒 Secure payment through Dana encrypted system</p>
+    </div>
+</div>
+
+                                    </div>
+                                    
+                                    <!-- GoPay Form -->
+                                    <div id="gopayForm" class="payment-form hidden">
+                                        <h3 class="text-lg font-semibold mb-4 text-purple-300">GoPay Payment</h3>
+                                        <div class="text-center p-8">
+    <div class="flex justify-center mb-4">
+        <div class="logo-icon gopay-icon">GoPay</div>
+    </div>
+    <h4 class="text-xl font-semibold mb-2">Pay with GoPay</h4>
+    <p class="text-gray-300 mb-6">You will be redirected to Gojek app to complete your payment securely.</p>
+    <div class="p-4 bg-green-500/20 rounded-xl">
+        <p class="text-sm text-green-200">🔒 Secure payment through GoPay's encrypted system</p>
+    </div>
+</div>
+
+                                    </div>
+                                    
+                                    <!-- OVO Form -->
+                                    <div id="ovoForm" class="payment-form hidden">
+                                        <h3 class="text-lg font-semibold mb-4 text-purple-300">OVO Payment</h3>
+                                        <div class="text-center p-8">
+                                            <div class="text-center p-8">
+    <div class="flex justify-center mb-4">
+        <div class="logo-icon ovo-icon">OVO</div>
+    </div>
+    <h4 class="text-xl font-semibold mb-2">Pay with OVO</h4>
+    <p class="text-gray-300 mb-6">You will be redirected to OVO app to complete your payment securely.</p>
+    <div class="p-4 bg-green-500/20 rounded-xl">
+        <p class="text-sm text-green-200">🔒 Secure payment through OVO encrypted system</p>
+    </div>
+</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Order Summary -->
+                    <div class="lg:col-span-1">
+                        <div class="payment-section rounded-2xl p-6 slide-up sticky top-8">
+                            <h3 class="text-xl font-semibold mb-6 text-purple-300">Order Summary</h3>
+                            
+                            <div class="space-y-4 mb-6">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-300">Professional Plan</span>
+                                    <span class="font-semibold">Rp 50.000</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Monthly billing</span>
+                                    <span class="text-gray-400">per month</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Tax (40%)</span>
+                                    <span class="text-gray-400">Rp 30.000</span>
+                                </div>
+                                <hr class="border-gray-600">
+                                <div class="flex justify-between text-lg font-bold">
+                                    <span>Total</span>
+                                    <span class="text-purple-400">Rp 30.000</span>
+                                </div>
+                            </div>
+                            
+                            <button type="button" id="paymentButton" class="premium-button w-full py-4 rounded-xl font-semibold text-lg mb-4">
+                                <span id="payButtonText">Complete Purchase - Rp 30.000</span>
+                            </button>
+                            
+                            <div class="text-center">
+                                <p class="text-xs text-gray-400 mb-2">🔒 Secure payment powered by enterprise-grade encryption</p>
+                                <div class="flex justify-center space-x-2 text-xs text-gray-500">
+                                    <span>SSL Protected</span>
+                                    <span>•</span>
+                                    <span>256-bit Encryption</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Payment method switching
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const paymentForms = document.querySelectorAll('.payment-form');
+        const payButton = document.getElementById('payButtonText');
+        const personalInfo = document.getElementById('personalInfo');
+        const paymentButton = document.getElementById('paymentButton');
+        
+        // Payment app deep links (contoh URL - sesuaikan dengan kebutuhan)
+        const paymentLinks = {
+            dana: 'dana://pay?merchant=JOJOAI&amount=4882890&description=JOJO AI Professional Plan',
+            gopay: 'gojek://pay?merchant=JOJOAI&amount=4882890&description=JOJO AI Professional Plan',
+            ovo: 'ovo://pay?merchant=JOJOAI&amount=4882890&description=JOJO AI Professional Plan'
+        };
+        
+        let currentPaymentMethod = 'card';
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                // Remove active class from all methods
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                // Add active class to clicked method
+                method.classList.add('active');
+                
+                // Hide all forms
+                paymentForms.forEach(form => form.classList.add('hidden'));
+                
+                // Get selected method
+                const selectedMethod = method.dataset.method;
+                currentPaymentMethod = selectedMethod;
+                
+                // Show/hide personal information based on payment method
+                if (selectedMethod === 'card') {
+                    personalInfo.style.display = 'block';
+                } else {
+                    personalInfo.style.display = 'none';
+                }
+                
+                // Show selected form
+                document.getElementById(selectedMethod + 'Form').classList.remove('hidden');
+                
+                // Update button text
+                switch(selectedMethod) {
+                    case 'dana':
+                        payButton.textContent = 'Pay with DANA - Rp 30.000';
+                        break;
+                    case 'gopay':
+                        payButton.textContent = 'Pay with GoPay - Rp 30.000';
+                        break;
+                    case 'ovo':
+                        payButton.textContent = 'Pay with OVO - Rp 30.000';
+                        break;
+                    default:
+                        payButton.textContent = 'Complete Purchase - Rp 30.000';
+                }
+            });
+        });
+        
+        // Payment button click handler
+        paymentButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            const submitBtn = paymentButton;
+            const originalText = submitBtn.innerHTML;
+            
+            if (currentPaymentMethod === 'card') {
+                // Handle credit card payment
+                submitBtn.innerHTML = '<div class="flex items-center justify-center"><div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>Processing...</div>';
+                submitBtn.disabled = true;
+                
+                // Simulate payment processing for credit card
+                setTimeout(() => {
+                    alert('Payment successful! Welcome to JOJO AI Professional!');
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+            } else {
+                // Handle e-wallet payments
+                const paymentLink = paymentLinks[currentPaymentMethod];
+                
+                if (paymentLink) {
+                    // Try to open the app
+                    window.location.href = paymentLink;
+                    
+                    // Fallback: Show instruction if app doesn't open
+                    setTimeout(() => {
+                        let appName = '';
+                        switch(currentPaymentMethod) {
+                            case 'dana': appName = 'DANA'; break;
+                            case 'gopay': appName = 'Gojek'; break;
+                            case 'ovo': appName = 'OVO'; break;
+                        }
+                        
+                        alert(`Please make sure you have ${appName} app installed. If the app doesn't open automatically, please open ${appName} app manually and complete the payment.`);
+                    }, 1000);
+                } else {
+                    alert('Payment method not available yet. Please try again later.');
+                }
+            }
+        });
+        
+        // Card number formatting
+        const cardInput = document.querySelector('input[placeholder="1234 5678 9012 3456"]');
+        if (cardInput) {
+            cardInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\s/g, '').substring(0, 16);
+                value = value.replace(/(.{4})/g, '$1 ').trim();
+                e.target.value = value;
+            });
+        }
+        
+        // Expiry date formatting
+        const expiryInput = document.querySelector('input[placeholder="MM/YY"]');
+        if (expiryInput) {
+            expiryInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '').substring(0, 4);
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2);
+                }
+                e.target.value = value;
+            });
+        }
+        
+        // Initialize animations
+        setTimeout(() => {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = '1';
+            });
+            
+            document.querySelectorAll('.slide-up').forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        }, 100);
+        
+        // Optimize scroll performance
+        let ticking = false;
+        
+        function updateScrollEffects() {
+            // Minimal scroll effects to prevent blank areas
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffects);
+                ticking = true;
+            }
+        });
+        
+        // Initialize default state
+        document.addEventListener('DOMContentLoaded', () => {
+            // Show personal info by default (credit card is active)
+            personalInfo.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

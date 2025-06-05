@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dukungan untuk VamsesOfficial</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --color-bg: #0a0a0a;
+            --color-bg-secondary: #111111;
+            --color-bg-card: #1a1a1a;
+            --color-text: #e4e4e7;
+            --color-text-muted: #a1a1aa;
+            --color-text-heading: #ffffff;
+            --color-border: #2a2a2a;
+            --color-accent: #3b82f6;
+            --color-accent-light: #60a5fa;
+            --color-green: #10b981;
+            --color-green-light: #34d399;
+            --color-purple: #8b5cf6;
+            --color-orange: #f59e0b;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-glow: 0 0 50px rgba(59, 130, 246, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundPulse 15s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .donation-container {
+            background: var(--color-bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            box-shadow: var(--shadow-xl), var(--shadow-glow);
+            animation: containerFadeIn 1s ease-out;
+            overflow: hidden;
+        }
+
+        .donation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes containerFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-text-heading);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleSlideIn 0.8s ease-out 0.2s both;
+        }
+
+        .ai-name {
+            background: var(--gradient-accent);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .ai-name::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            border-radius: 1px;
+            animation: underlineExpand 0.8s ease-out 1s both;
+        }
+
+        @keyframes titleSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes underlineExpand {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        .intro-text {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .payment-methods {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .payment-method {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: methodSlideIn 0.6s ease-out both;
+        }
+
+        .payment-method:nth-child(1) { animation-delay: 0.6s; }
+        .payment-method:nth-child(2) { animation-delay: 0.7s; }
+        .payment-method:nth-child(3) { animation-delay: 0.8s; }
+        .payment-method:nth-child(4) { animation-delay: 0.9s; }
+
+        @keyframes methodSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .payment-method::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--color-accent);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .payment-method:hover::before {
+            left: 100%;
+        }
+
+        .method-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: inherit;
+            border-radius: inherit;
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0.5;
+        }
+
+        .dana-icon { background: linear-gradient(135deg, #108ee9 0%, #40a9ff 100%); }
+        .shopeepay-icon { background: linear-gradient(135deg, #ee4d2d 0%, #ff7a45 100%); }
+        .ovo-icon { background: linear-gradient(135deg, #4d2683 0%, #7c3aed 100%); }
+        .gopay-icon { background: linear-gradient(135deg, #00aed6 0%, #22d3ee 100%); }
+
+        .method-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .method-name {
+            font-weight: 600;
+            color: var(--color-text-heading);
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .method-number {
+            color: var(--color-text-muted);
+            font-size: 0.875rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-btn {
+            background: var(--gradient-accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            min-width: 80px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .copy-btn:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .copy-btn.copied {
+            background: var(--color-green);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .thank-you-section {
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .thank-you-text {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out 1.2s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.8s ease-out 1.4s both;
+        }
+
+        .back-link:hover {
+            background: var(--color-bg-secondary);
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .success-animation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 2rem;
+            z-index: 1000;
+            opacity: 0;
+            scale: 0.8;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .success-animation.show {
+            opacity: 1;
+            scale: 1;
+        }
+
+        .success-checkmark {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--color-green);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .donation-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .payment-method {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            
+            .method-info {
+                justify-content: flex-start;
+            }
+            
+            .copy-btn {
+                align-self: center;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .donation-container {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .intro-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    
+    <div class="main-container">
+        <div class="donation-container">
+            <div class="header">
+                <h1>Dukungan untuk <span class="ai-name">JOJO AI</span></h1>
+                <p class="intro-text">Setiap dukungan Anda sangat berarti untuk pengembangan dan pemeliharaan JOJO AI agar terus bisa memberikan manfaat yang luar biasa.</p>
+            </div>
+
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <div class="method-info">
+                        <div class="logo-icon dana-icon">Dana</div>
+                        <div class="method-details">
+                            <div class="method-name">Dana</div>
+                            <span class="method-number" id="dana-number">085738639969</span>
+                        </div>
+                    </div>
+                    <button class="copy-btn" data-clipboard-target="#dana-number">Salin</button>
+                </div>
+
+                <div class="payment-method">
+                    <div class="method-info">
+                        <div class="logo-icon shopeepay-icon">Shop</div>
+                        <div class="method-details">
+                            <div class="method-name">ShopeePay</div>
+                            <span class="method-number" id="shopeepay-number">088213292687</span>
+                        </div>
+                    </div>
+                    <button class="copy-btn" data-clipboard-target="#shopeepay-number">Salin</button>
+                </div>
+
+                <div class="payment-method">
+                    <div class="method-info">
+                        <div class="logo-icon ovo-icon">OVO</div>
+                        <div class="method-details">
+                            <div class="method-name">OVO</div>
+                            <span class="method-number" id="ovo-number">085738639969</span>
+                        </div>
+                    </div>
+                    <button class="copy-btn" data-clipboard-target="#ovo-number">Salin</button>
+                </div>
+
+                <div class="payment-method">
+                    <div class="method-info">
+                        <div class="logo-icon gopay-icon">GPay</div>
+                        <div class="method-details">
+                            <div class="method-name">GoPay</div>
+                            <span class="method-number" id="gopay-number">085183221210</span>
+                        </div>
+                    </div>
+                    <button class="copy-btn" data-clipboard-target="#gopay-number">Salin</button>
+                </div>
+            </div>
+
+            <div class="thank-you-section">
+                <p class="thank-you-text">✨ Terima kasih atas kemurahan hati Anda! ✨</p>
+                <a href="index.html" class="back-link">
+                    ← Kembali ke Halaman Sebelumnya
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-animation" id="successAnimation">
+        <div class="success-checkmark">✓</div>
+        <p style="text-align: center; color: var(--color-text-heading); font-weight: 600;">Nomor berhasil disalin!</p>
+    </div>
+
+    <script>
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Copy functionality with enhanced animation
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const targetId = button.dataset.clipboardTarget;
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    navigator.clipboard.writeText(targetElement.innerText)
+                        .then(() => {
+                            const originalText = button.innerText;
+                            button.innerText = 'Tersalin!';
+                            button.classList.add('copied');
+                            
+                            // Show success animation
+                            const successAnimation = document.getElementById('successAnimation');
+                            successAnimation.classList.add('show');
+                            
+                            // Create ripple effect
+                            const ripple = document.createElement('div');
+                            const rect = button.getBoundingClientRect();
+                            const size = Math.max(rect.width, rect.height);
+                            const x = e.clientX - rect.left - size / 2;
+                            const y = e.clientY - rect.top - size / 2;
+                            
+                            ripple.style.cssText = `
+                                position: absolute;
+                                border-radius: 50%;
+                                background: rgba(255, 255, 255, 0.3);
+                                width: ${size}px;
+                                height: ${size}px;
+                                left: ${x}px;
+                                top: ${y}px;
+                                pointer-events: none;
+                                animation: ripple 0.6s ease-out;
+                            `;
+                            
+                            button.style.position = 'relative';
+                            button.appendChild(ripple);
+                            
+                            setTimeout(() => {
+                                button.innerText = originalText;
+                                button.classList.remove('copied');
+                                successAnimation.classList.remove('show');
+                                if (ripple.parentNode) {
+                                    ripple.parentNode.removeChild(ripple);
+                                }
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Gagal menyalin: ', err);
+                            alert('Gagal menyalin. Mohon salin secara manual.');
+                        });
+                }
+            });
+        });
+
+        // Add ripple animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        document.addEventListener('DOMContentLoaded', createParticles);
+
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.payment-method');
+            const container = document.querySelector('.donation-container');
+            const containerRect = container.getBoundingClientRect();
+            const centerX = containerRect.left + containerRect.width / 2;
+            const centerY = containerRect.top + containerRect.height / 2;
+            
+            const mouseX = e.clientX - centerX;
+            const mouseY = e.clientY - centerY;
+            
+            const rotateX = mouseY / 20;
+            const rotateY = mouseX / 20;
+            
+            container.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        // Reset transform when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            const container = document.querySelector('.donation-container');
+            container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - JOJO AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .premium-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .premium-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+        
+        .premium-button {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .premium-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+        }
+        
+        .premium-button:active {
+            transform: translateY(0);
+        }
+        
+        .price-tag {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        
+        .feature-item {
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+        }
+        
+        .feature-item:hover {
+            border-left-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.05);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        
+        .enterprise-crown {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #1f2937;
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        
+        /* Optimized floating background */
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.2));
+            filter: blur(2px);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .floating-orb:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-orb:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 15%;
+            animation-delay: -5s;
+        }
+        
+        .floating-orb:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 30%;
+            left: 60%;
+            animation-delay: -10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Loading states */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        .loading-text {
+            color: #8b5cf6;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        
+        /* Responsive optimizations */
+        @media (max-width: 768px) {
+            .premium-card {
+                backdrop-filter: blur(10px);
+            }
+            
+            .floating-orb {
+                display: none;
+            }
+        }
+        
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-white relative overflow-x-hidden">
+    <!-- Optimized Background -->
+    <div class="floating-bg">
+        <div class="floating-orb"></div>
+        <div class="floating-orb"></div>
+        <div class="floating-orb"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-10 glass-effect">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <div class="text-2xl font-bold glow-text">
+                    <span class="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                        JOJO AI
+                    </span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="hover:text-purple-400 transition-colors duration-300">Features</a>
+                    <a href="#" class="hover:text-purple-400 transition-colors duration-300">Pricing</a>
+                    <a href="#" class="hover:text-purple-400 transition-colors duration-300">Enterprise</a>
+                    <a href="#" class="hover:text-purple-400 transition-colors duration-300">Support</a>
+                </div>
+                <button class="premium-button px-6 py-2 rounded-lg font-semibold">
+                    Sign In
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 text-center py-20">
+        <div class="container mx-auto px-6">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6 fade-in glow-text">
+                <span class="bg-gradient-to-r from-purple-400 via-blue-400 to-purple-600 bg-clip-text text-transparent">
+                    Choose Your Plan
+                </span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 fade-in stagger-1 max-w-3xl mx-auto">
+                Unlock the power of next-generation technology with our premium enterprise solutions
+            </p>
+        </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="relative z-10 py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Starter Plan -->
+                <div class="premium-card rounded-2xl p-8 fade-in stagger-2 relative">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-purple-300">Starter</h3>
+                        <div class="price-tag rounded-xl p-4 mb-6 inline-block">
+                            <span class="text-4xl font-bold">Rp 30.000</span>
+                            <span class="text-gray-400">/month</span>
+                        </div>
+                        <p class="text-gray-400">Perfect for small teams</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-purple-400">✓</span> Cocok untuk pemula atau usaha kecil
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-purple-400">✓</span> Fitur chatbot dasar dengan respons otomatis
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-purple-400">✓</span> Dapat melayani hingga 1000 percakapan/hari
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-purple-400">✓</span> Chatbot dengan fitur download video TikTok dan Instagram (batas 50 video/hari)
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-purple-400">✓</span> Upload gambar maksimal 5 gambar/bulan
+                        </li>
+                    </ul>
+                    
+                    <div class="text-center">
+                        <button id="getStartedButton" class="premium-button w-full py-4 rounded-xl font-semibold text-lg">
+                            Get Started
+                        </button>
+                        <div id="loadingGetStarted" class="hidden loading-text">
+                            Loading, please wait...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Plan -->
+                <div class="premium-card rounded-2xl p-8 fade-in stagger-3 relative transform md:scale-105">
+                    <div class="enterprise-crown">POPULAR</div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-300">Professional</h3>
+                        <div class="price-tag rounded-xl p-4 mb-6 inline-block">
+                            <span class="text-4xl font-bold">Rp 60.000</span>
+                            <span class="text-gray-400">/month</span>
+                        </div>
+                        <p class="text-gray-400">Best for growing businesses</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-blue-400">✓</span> Fitur chatbot lanjutan dengan kemampuan personalisasi
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-blue-400">✓</span> Dapat melayani hingga 10.000 percakapan/hari
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-blue-400">✓</span> Integrasi dengan platform media sosial (Facebook, WhatsApp)
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-blue-400">✓</span> Chatbot dengan fitur download video TikTok dan Instagram (batas 100 video/hari)
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-blue-400">✓</span> Upload gambar maksimal 10 gambar/bulan
+                        </li>
+                    </ul>
+                    
+                    <div class="text-center">
+                        <button id="upgradeButton" class="premium-button w-full py-4 rounded-xl font-semibold text-lg">
+                            Upgrade Now
+                        </button>
+                        <div id="loadingText" class="hidden loading-text">
+                            Loading, please wait...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="premium-card rounded-2xl p-8 fade-in stagger-4 relative">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-yellow-300">Enterprise</h3>
+                        <div class="price-tag rounded-xl p-4 mb-6 inline-block">
+                            <span class="text-4xl font-bold">Rp 100.000</span>
+                            <span class="text-gray-400">/month</span>
+                        </div>
+                        <p class="text-gray-400">For large organizations</p>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-yellow-400">✓</span> Download video TikTok dan Instagram unlimited dengan kualitas HD
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-yellow-400">✓</span> Percakapan chatbot tanpa batas
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-yellow-400">✓</span> Upload gambar unlimited
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-yellow-400">✓</span> 24/7 dedicated support
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-yellow-400">✓</span> Masuk Dalam leaderboard
+                        </li>
+                        <li class="feature-item rounded-lg py-2">
+                            <span class="text-yellow-400">✓</span> Custom deployment
+                        </li>
+                    </ul>
+                    
+                    <div class="flex flex-col space-y-3">
+                        <a href="https://wa.me/6285738639969?text=Halo+Owner%20JOJO%20AI,%20saya%20tertarik%20dengan%20paket%20Enterprise" target="_blank"
+                           class="premium-button py-4 rounded-xl font-semibold text-lg text-center block">
+                            Chat via WhatsApp
+                        </a>
+                        <a href="mailto:dagus3375@gmail.com?subject=Permintaan%20Informasi%20Enterprise%20Plan&body=Halo%20JOJO%20AI,%0ASaya%20tertarik%20dengan%20paket%20Enterprise.%20Tolong%20berikan%20info%20lebih%20lanjut."
+                           class="premium-button py-4 rounded-xl font-semibold text-lg text-center block">
+                            Email Sales
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 glass-effect py-12 mt-20">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 glow-text">JOJO AI</h3>
+                    <p class="text-gray-400">Next-generation enterprise solutions for modern businesses.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Features</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Enterprise</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Contact</a></li>
+                        <li><a href="donation.html" class="hover:text-purple-400 transition-colors">Donasi</a></li>
+                        
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 JOJO AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Optimized button handlers
+        document.getElementById('getStartedButton').addEventListener('click', function () {
+            const btn = this;
+            const loadingText = document.getElementById('loadingGetStarted');
+
+            btn.textContent = 'Loading...';
+            btn.classList.add('loading');
+            loadingText.classList.remove('hidden');
+
+            setTimeout(function () {
+                window.location.href = 'https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012092025060568411123';
+            }, 1500);
+        });
+
+        document.getElementById('upgradeButton').addEventListener('click', function () {
+            const btn = this;
+            const loadingText = document.getElementById('loadingText');
+
+            btn.textContent = 'Loading...';
+            btn.classList.add('loading');
+            loadingText.classList.remove('hidden');
+
+            setTimeout(function () {
+                window.location.href = 'payment.html';
+            }, 1500);
+        });
+
+        // Optimized scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth hover effects
+        document.querySelectorAll('.premium-card').forEach(card => {
+            let hoverTimeout;
+            
+            card.addEventListener('mouseenter', function() {
+                clearTimeout(hoverTimeout);
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                hoverTimeout = setTimeout(() => {
+                    this.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+
+        // Performance optimization: reduce animations on scroll
+        let isScrolling = false;
+        let scrollTimeout;
+
+        window.addEventListener('scroll', function() {
+            if (!isScrolling) {
+                document.body.style.pointerEvents = 'none';
+                isScrolling = true;
+            }
+            
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(function() {
+                document.body.style.pointerEvents = 'auto';
+                isScrolling = false;
+            }, 100);
+        });
+
+        // Preload critical styles
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
