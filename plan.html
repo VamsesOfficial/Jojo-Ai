@@ -261,7 +261,7 @@
                     </ul>
                     
                     <div class="text-center">
-                        <button id="getStartedButton" class="premium-button w-full py-4 rounded-xl font-semibold text-lg">
+                        <button id="getStartedButton" class="premium-button w-full py-4 rounded-xl font-semibold text-lg" onclick="selectPlan('starter')">
                             Get Started
                         </button>
                         <div id="loadingGetStarted" class="hidden loading-text">
@@ -301,7 +301,7 @@
                     </ul>
                     
                     <div class="text-center">
-                        <button id="upgradeButton" class="premium-button w-full py-4 rounded-xl font-semibold text-lg">
+                        <button id="upgradeButton" class="premium-button w-full py-4 rounded-xl font-semibold text-lg" onclick="selectPlan('professional')">
                             Upgrade Now
                         </button>
                         <div id="loadingText" class="hidden loading-text">
@@ -343,6 +343,9 @@
                     </ul>
                     
                     <div class="flex flex-col space-y-3">
+                        <button class="premium-button py-4 rounded-xl font-semibold text-lg" onclick="selectPlan('enterprise')">
+                            Purchase Enterprise
+                        </button>
                         <a href="https://wa.me/6285738639969?text=Halo+Owner%20JOJO%20AI,%20saya%20tertarik%20dengan%20paket%20Enterprise" target="_blank"
                            class="premium-button py-4 rounded-xl font-semibold text-lg text-center block">
                             Chat via WhatsApp
@@ -399,32 +402,29 @@
     </footer>
     
     <script>
-        // Optimized button handlers
-        document.getElementById('getStartedButton').addEventListener('click', function () {
-            const btn = this;
-            const loadingText = document.getElementById('loadingGetStarted');
-
-            btn.textContent = 'Loading...';
-            btn.classList.add('loading');
-            loadingText.classList.remove('hidden');
-
-            setTimeout(function () {
-                window.location.href = 'https://link.dana.id/minta?full_url=https://qr.dana.id/v1/281012092025060568411123';
+        // Plan selection function
+        function selectPlan(planType) {
+            const button = event.target;
+            const loadingElement = button.parentNode.querySelector('.loading-text');
+            
+            // Show loading state
+            button.textContent = 'Loading...';
+            button.classList.add('loading');
+            if (loadingElement) {
+                loadingElement.classList.remove('hidden');
+            }
+            
+            // Redirect to payment page with plan parameter
+            setTimeout(function() {
+                if (planType === 'starter') {
+                    // Redirect to DANA link for starter plan
+                    window.location.href = `payment.html?plan=${planType}`;
+                } else {
+                    // Redirect to payment.html with plan parameter
+                    window.location.href = `payment.html?plan=${planType}`;
+                }
             }, 1500);
-        });
-
-        document.getElementById('upgradeButton').addEventListener('click', function () {
-            const btn = this;
-            const loadingText = document.getElementById('loadingText');
-
-            btn.textContent = 'Loading...';
-            btn.classList.add('loading');
-            loadingText.classList.remove('hidden');
-
-            setTimeout(function () {
-                window.location.href = 'payment.html';
-            }, 1500);
-        });
+        }
 
         // Optimized scroll animations
         const observerOptions = {
