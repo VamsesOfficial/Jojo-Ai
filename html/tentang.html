@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tentang Kami - Awal Mula Platform</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #f59e0b;
+      --accent: #06b6d4;
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(255, 255, 255, 0.05);
+      --bg-card-hover: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.1);
+      --text-light: #ffffff;
+      --text-muted: #a1a1aa;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Simplified background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+    }
+
+    /* Mobile-first Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem;
+      background: rgba(10, 10, 15, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-light);
+      background: var(--bg-card);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    /* Header */
+    header {
+      padding: 6rem 1rem 3rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, rgba(99, 102, 241, 0.1) 100%);
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 3rem 1rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      background: var(--bg-card);
+      padding: 2.5rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Simplified Timeline */
+    .timeline {
+      margin: 1.5rem 0;
+    }
+
+    .milestone {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: rgba(99, 102, 241, 0.1);
+      border-radius: 0.5rem;
+      border-left: 3px solid var(--primary);
+    }
+
+    .milestone strong {
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    /* Team Section */
+    .team-section {
+      padding: 4rem 1rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .team-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .team-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .team-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .team-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .team-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: white;
+      position: relative;
+    }
+
+    .team-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    .team-role {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .team-bio {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .instagram-handle {
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 0.5rem;
+      opacity: 0.8;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      padding: 0.5rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg-dark);
+        flex-direction: column;
+        padding: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--text-light);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .hero-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content {
+        padding: 1.5rem 1rem;
+      }
+
+      .card {
+        padding: 1.25rem;
+      }
+
+      .team-card {
+        padding: 1.5rem;
+      }
+
+      .team-avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 1.3rem;
+      }
+    }
+
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Loading simplified */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="bg-animation"></div>
+
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo-link">
+    <div class="logo">Kembali</div>
+     </a>
+      <button class="mobile-menu" id="mobile-menu">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Beranda</a></li>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#tim">Tim</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header id="home">
+    <div class="header-content">
+      <h1>Perjalanan Kami</h1>
+      <p class="header-subtitle">Menciptakan masa depan dengan teknologi terdepan</p>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content fade-in">
+      <h2>Dari Sebuah Ide, Menjadi Solusi Nyata</h2>
+      <p>Platform ini lahir dari percakapan sederhana di sebuah kedai kopi, berbekal semangat untuk menciptakan perubahan yang bermakna dalam dunia digital.</p>
+    </div>
+  </section>
+
+  <main class="main-content" id="tentang">
+    <div class="card fade-in">
+      <h3>🚀 Awal Mula</h3>
+      <p>Ide platform ini muncul saat kami menyadari adanya celah besar antara kebutuhan pengguna digital dengan solusi yang ada saat itu. Dari diskusi ringan di kedai kopi, konsep awal lahir: menciptakan platform yang intuitif, efisien, dan bermakna bagi setiap penggunanya.</p>
+    </div>
+
+    <div class="card fade-in">
+      <h3>⏰ Perjalanan & Tantangan</h3>
+      <div class="timeline">
+        <div class="milestone">
+          <strong>Q1 2025</strong> - Ide awal muncul dan mulai disusun menjadi proposal sederhana dengan visi yang jelas.
+        </div>
+        <div class="milestone">
+          <strong>Q2 2025</strong> - Prototype dibangun dengan tim kecil dan penuh semangat.
+        </div>
+      </div>
+      <p>Perjalanan kami tidak mudah—tantangan teknis, keterbatasan sumber daya, dan tekanan waktu mewarnai proses kami. Tapi semangat kami tak pernah surut, dan setiap rintangan menjadi pembelajaran berharga.</p>
+    </div>
+
+    <div class="card fade-in">
+      <h3>🎯 Visi & Misi</h3>
+      <p>Kami percaya teknologi harus memberdayakan manusia, bukan sebaliknya. Visi kami adalah menjadi platform yang membantu kehidupan sehari-hari menjadi lebih produktif dan bermakna. Misi kami adalah terus berinovasi dengan tetap mendengarkan suara pengguna dan mengutamakan user experience yang luar biasa.</p>
+    </div>
+
+    <div class="card fade-in">
+      <h3>🙏 Terima Kasih Tim Hebat</h3>
+      <p>Untuk seluruh anggota tim pengembang: terima kasih telah bekerja tanpa lelah, melewati malam-malam panjang coding, dan selalu menjaga semangat kolaboratif. Platform ini berdiri tegak karena dedikasi dan passion kalian yang luar biasa.</p>
+    </div>
+
+    <div class="card fade-in">
+      <h3>❤️ Apresiasi Pengguna & Supporter</h3>
+      <p>Untuk para pengguna awal yang telah memberikan feedback jujur, kritik membangun, dan semangat positif—terima kasih. Kalian adalah bagian dari pondasi kami. Kami juga mengucapkan terima kasih kepada para investor dan komunitas yang telah percaya sejak hari pertama.</p>
+    </div>
+
+    <div class="card fade-in">
+      <h3>🚀 Langkah Kami ke Depan</h3>
+      <p>Kami belum selesai—perjalanan ini masih panjang dan penuh dengan kemungkinan tak terbatas. Kami akan terus membangun, belajar, dan tumbuh bersama komunitas kami. Dengan AI, machine learning, dan teknologi emerging lainnya, bersama kita bisa menciptakan perubahan yang berdampak global.</p>
+    </div>
+  </main>
+
+  <section class="team-section" id="tim">
+    <div class="team-container">
+      <div class="team-header">
+        <h2>Tim Kami</h2>
+        <p>Bertemu dengan orang-orang hebat di balik platform revolusioner ini</p>
+      </div>
+      
+      <div class="team-grid">
+        <div class="team-card fade-in" onclick="openInstagram('ketutaguss')">
+          <div class="team-avatar">
+            <span>A</span>
+          </div>
+          <h3 class="team-name">Agus</h3>
+          <p class="team-role">Developer</p>
+          <p class="team-bio">Visioner teknologi dengan 8+ tahun pengalaman di industri startup. Passionate tentang AI dan user experience yang revolusioner.</p>
+          <p class="instagram-handle">@ketutaguss_</p>
+        </div>
+
+        <div class="team-card fade-in" onclick="openInstagram('arsrfii')">
+          <div class="team-avatar">
+            <span>R</span>
+          </div>
+          <h3 class="team-name">Rasya</h3>
+          <p class="team-role">Idea Creator</p>
+          <p class="instagram-handle">@arsrfii</p>
+        </div>
+
+        <div class="team-card fade-in" onclick="openInstagram('yanzbotz_')">
+          <div class="team-avatar">
+            <span>Y</span>
+          </div>
+          <h3 class="team-name">Yanz</h3>
+          <p class="team-role">Backend</p>
+          <p class="instagram-handle">@yanzbotz_</p>
+        </div>
+
+        <div class="team-card fade-in" onclick="openInstagram('fenrirxd.store')">
+          <div class="team-avatar">
+            <span>R</span>
+          </div>
+          <h3 class="team-name">Rama</h3>
+          <p class="team-role">Donatur</p>
+          <p class="instagram-handle">@fenrirxd.store</p>
+        </div>
+
+        <div class="team-card fade-in" onclick="openInstagram('adi.cug')">
+          <div class="team-avatar">
+            <span>A</span>
+          </div>
+          <h3 class="team-name">Adi</h3>
+          <p class="team-role">System</p>
+          <p class="instagram-handle">@adi.cug</p>
+        </div>
+        
+        <div class="team-card fade-in" onclick="openInstagram('one2_xyz')">
+          <div class="team-avatar">
+            <span>W</span>
+          </div>
+          <h3 class="team-name">Wahid</h3>
+          <p class="team-role">System</p>
+          <p class="instagram-handle">@one2_xyz</p>
+        </div>
+      </div>
+    </div>
+  </section> 
+
+  <footer id="kontak">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="../html/donation.html">Dukungan</a>
+      </div>
+      <p>&copy; 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simplified loading
+    window.addEventListener('load', () => {
+      const loading = document.getElementById('loading');
+      setTimeout(() => {
+        loading.style.opacity = '0';
+        setTimeout(() => {
+          loading.style.display = 'none';
+        }, 500);
+      }, 800);
+    });
+
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+
+    mobileMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Simplified scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Navbar hide/show on scroll
+    let lastScrollY = window.scrollY;
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < lastScrollY) {
+        navbar.style.transform = 'translateY(0)';
+      } else if (currentScrollY > 100) {
+        navbar.style.transform = 'translateY(-100%)';
+      }
+      
+      lastScrollY = currentScrollY;
+    });
+
+    // Instagram redirect function
+    function openInstagram(username) {
+      // Try to open Instagram app first, fallback to web
+      const instagramUrl = `https://www.instagram.com/${username}/`;
+      window.open(instagramUrl, '_blank');
+    }
+
+    // Touch-friendly interactions for mobile
+    if ('ontouchstart' in window) {
+      document.querySelectorAll('.team-card').forEach(card => {
+        card.addEventListener('touchstart', function() {
+          this.style.transform = 'scale(0.98)';
+        });
+        
+        card.addEventListener('touchend', function() {
+          this.style.transform = '';
+        });
+      });
+    }
+  </script>
+</body>
+</html>
